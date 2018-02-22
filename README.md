@@ -23,3 +23,4 @@ https://www.jianshu.com/p/db88ea840e66
 int main(int argc,char* argv[])
 https://stackoverflow.com/questions/3024197/what-does-int-argc-char-argv-mean
 http://blog.csdn.net/lambol_8309/article/details/4524964
+http://en.cppreference.com/w/cpp/language/main_function

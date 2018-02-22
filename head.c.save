@@ -2,7 +2,7 @@
 #include "stat.h"
 #include "user.h"
 
-char buf[3];
+char buf[512];
 
 void
 head(int fd, char *name, int x)
@@ -14,7 +14,7 @@ head(int fd, char *name, int x)
 
   while((n = read(fd, buf, sizeof(buf))) > 0 && l<x)
   {
-	
+  	
     for(i=0;i<=n && l<x;i++)
     {
       if(buf[i]!='\n')
@@ -30,6 +30,7 @@ head(int fd, char *name, int x)
       
       
     }
+    // printf(1,"hey there : %d\n",l);
 
   }
   if(n < 0)
@@ -37,6 +38,7 @@ head(int fd, char *name, int x)
     printf(1, "head: read error\n");
    exit();
    }
+  // printf(1, "%d %d %d %s\n", l, w, c, name);
 }
 
 int
@@ -46,10 +48,13 @@ main(int argc, char *argv[])
 
   if(argc <= 1)
   {
-    head(0, "", 10);
+   
     exit();
   }
+// int len=sizeof(argv[1]);
 
+
+//when no: of lines is not defined 
 else if(argc==2)
 {
   for(i = 1; i < argc; i++)
@@ -63,7 +68,7 @@ else if(argc==2)
     }
 }
 
-  
+//when no of lines is defined  
 else if(argc==3)
 {
 char c[512];
@@ -71,7 +76,7 @@ strcpy(c,argv[1]);
 char *num_str = c;
 num_str=num_str+1;
 int x= atoi(num_str);
-
+// printf(1,"%d\n",x);
 
   for(i = 2; i < argc; i++)
   {
