@@ -26,23 +26,20 @@ int main(int argc, char *argv[])
   char c[512];
   char *num_str = c;
 
- if(argc <= 1){head(0, 10);exit();}
- i=1;
- if(argv[1][0]=='-'){
-    
+ if(argc <= 1){head(0, 10);exit();} i=1;
+
+ if(argv[1][0]=='-'){ 
     strcpy(c,argv[1]);
     num_str=num_str+1;
     x= atoi(num_str);
-    if(argc <= 2){head(0,x);exit();}
-    i=2;
+    if(argc <= 2){head(0,x);exit();}i=2;
  }
 
- for(; i < argc; i++)
-    {
+ for(; i < argc; i++){
        if((fd = open(argv[i], 0)) < 0){
-          printf(1, "head: cannot open %s\n", argv[i]);
-          exit();}
-       head(fd,x);
+       printf(1, "head: cannot open %s\n", argv[i]);
+       exit();}
+     head(fd,x);
     }
  close(fd);
  exit();
