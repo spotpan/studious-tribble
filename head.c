@@ -8,10 +8,8 @@ void head(int fd, int x)
 {
   int i, n, l=0;
 
-  while((n = read(fd, buf, sizeof(buf))) > 0 && l<x)
-  {
-    for(i=0;i<=n && l<x;i++)
-    {
+  while((n = read(fd, buf, sizeof(buf))) > 0 && l<x){
+    for(i=0;i<=n && l<x;i++){
       if(buf[i]!='\n'){printf(1,"%c",buf[i]);}
       else{printf(1,"\n");l++;}
     }
