@@ -6,12 +6,9 @@ char buf[512];
 
 void tail(int fd, int x)
 {
-  int i, n, p, l=0;
+  int i, n,p, l=0;
 
-   if((n = read(fd, buf, sizeof(buf))) < 0)
-   {printf(1, "tail: read error\n");exit();}
-
-   while(n > 0){
+   if((n = read(fd, buf, sizeof(buf))) > 0){
     for(i=0; i<n; i++){
 	if(buf[i] == '\n'){l++;if(l>=x){p=i+1;}}
 
@@ -20,6 +17,8 @@ void tail(int fd, int x)
         else{printf(1,"\n");}
       }
     }
+
+  if(n < 0){printf(1, "tail: read error\n");exit();}
 }
 
 int main(int argc, char *argv[])
@@ -39,7 +38,7 @@ int main(int argc, char *argv[])
 
  for(; i < argc; i++){
        if((fd = open(argv[i], 0)) < 0){
-       printf(1, "head: cannot open %s\n", argv[i]);
+       printf(1, "tail: cannot open %s\n", argv[i]);
        exit();}
      tail(fd,x);
     }
