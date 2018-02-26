@@ -6,11 +6,12 @@ char buf[512];
 
 void tail(int fd, int x)
 {
-  int i, n,p, l=0;
+  int i, n, p, l=0;
 
-   if((n = read(fd, buf, sizeof(buf))) > 0){
+ if((n = read(fd, buf, sizeof(buf))) > 0){
     for(i=0; i<n; i++){
 	if(buf[i] == '\n'){l++;if(l>=x){p=i+1;}}
+    }
 
     for(;p<=n;p++){
         if(buf[p]!='\n'){printf(1,"%c",buf[p]);}

@@ -26,6 +26,9 @@ http://blog.csdn.net/lambol_8309/article/details/4524964
 http://en.cppreference.com/w/cpp/language/main_function
 
 
+implicit declaration and explicit declaration
+https://www.ctolib.com/topics-55828.html
+
 
 xv6 code analysis:
 1.bootasm.S 
