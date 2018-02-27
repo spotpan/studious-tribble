@@ -8,17 +8,17 @@ void tail(int fd, int x)
 {
 
 
-  int i, n;
+  int i, n, m;
   int l = 0;
-//  int s = 0;
+  int s = 0;
 //  int k = 0;
 
-//  while((n = read(fd, buf, sizeof(buf))) > 0){
-//    for(i=0; i<n; i++){
-//      if(buf[i] == '\n')
-//        s++;
-//      }
-//    }
+  while((m = read(fd, buf, sizeof(buf))) > 0 && (s<20) ){
+    for(i=0; i<m; i++){
+      if(buf[i] == '\n')
+        s++;
+      }
+    }
 
 //	k = s-x+1;
 
@@ -31,7 +31,7 @@ void tail(int fd, int x)
 //	if(buf[i]=='\n'){l++;}}while(l<k && i<n);
 	
 	if(buf[i]=='\n'){l++;}}
-	write(1, buf, i);
+    write(1, buf, i);
   }
 
 }
