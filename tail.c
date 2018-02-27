@@ -6,21 +6,36 @@ char buf[512];
 
 void tail(int fd, int x)
 {
-  int i, n, p, l=0;
 
- if((n = read(fd, buf, sizeof(buf))) > 0){
+
+  int i, n;
+  int l = 0;
+//  int s = 0;
+//  int k = 0;
+
+//  while((n = read(fd, buf, sizeof(buf))) > 0){
+//    for(i=0; i<n; i++){
+//      if(buf[i] == '\n')
+//        s++;
+//      }
+//    }
+
+//	k = s-x+1;
+
+//	printf(1, "%d\n", k);
+  while((n = read(fd, buf, sizeof(buf))) > 0 && (l<x) ){
     for(i=0; i<n; i++){
-	if(buf[i] == '\n'){l++;if(l>=x){p=i+1;}}
-    }
 
-    for(;p<=n;p++){
-        if(buf[p]!='\n'){printf(1,"%c",buf[p]);}
-        else{printf(1,"\n");}
-      }
-    }
+//	do{
+//	read(0, buf, i);
+//	if(buf[i]=='\n'){l++;}}while(l<k && i<n);
+	
+	if(buf[i]=='\n'){l++;}}
+	write(1, buf, i);
+  }
 
-  if(n < 0){printf(1, "tail: read error\n");exit();}
 }
+
 
 int main(int argc, char *argv[])
 {
