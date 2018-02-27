@@ -4,34 +4,37 @@
 
 char buf[512];
 
-void tail(int fd, int x)
+int wl(int fd)
 {
 
-
-  int i, n, m;
-  int l = 0;
+  int i, n;
   int s = 0;
 //  int k = 0;
 
-  while((m = read(fd, buf, sizeof(buf))) > 0 && (s<20) ){
-    for(i=0; i<m; i++){
+  while((n = read(fd, buf, sizeof(buf))) > 0 ){
+    for(i=0; i<n; i++){
       if(buf[i] == '\n')
         s++;
       }
     }
-
+	return s;
+}
 //	k = s-x+1;
 
-//	printf(1, "%d\n", k);
-  while((n = read(fd, buf, sizeof(buf))) > 0 && (l<x) ){
+void tail(int fd, int x){
+	int i=0,n, l=0;
+//	int a;
+
+//	a=wl(fd);
+//	printf(1, "%d\n", a);
+  while((n = read(fd, buf, sizeof(buf))) > 0 && (l<49) ){
     for(i=0; i<n; i++){
 
-//	do{
+	if(buf[i]=='\n'){l++;}
+	if(l>39){ if(buf[i]!='\n'){printf(1,"%c",buf[i]);}
+		else{printf(1,"\n");}  }
+	}
 //	read(0, buf, i);
-//	if(buf[i]=='\n'){l++;}}while(l<k && i<n);
-	
-	if(buf[i]=='\n'){l++;}}
-    write(1, buf, i);
   }
 
 }
