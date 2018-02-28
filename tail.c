@@ -1,4 +1,3 @@
-
 #include "types.h"
 #include "stat.h"
 #include "user.h"
@@ -10,7 +9,7 @@ tail(int fd, char* filepath, int x)
 {
   int n, m, count;
   char *p, *q;
-  memset(buf, 0, sizeof(char)*1024);
+  memset(buf, 0, sizeof(char)*512);
   if((fd = open(filepath, 0)) < 0){
     printf(1, "tail: cannot open %s\n", filepath);
     exit();
