@@ -35,3 +35,5 @@ xv6 code analysis:
 (1)memlayout: inline
 http://www.cnblogs.com/pengyingh/articles/2405718.html
 
+(2)virtual memory:
+https://courses.cs.washington.edu/courses/csep551/17wi/l02.pdf
