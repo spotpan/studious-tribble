@@ -50,7 +50,7 @@ runcmd(struct cmd *cmd)
 
   if(cmd == 0)
     exit(0);
-
+  
   switch(cmd->type){
   default:
     fprintf(stderr, "unknown runcmd\n");
@@ -58,64 +58,69 @@ runcmd(struct cmd *cmd)
 
   case ' ':
     ecmd = (struct execcmd*)cmd;
-
-    char path1[100] = "/bin/";
-    char path2[100] = "/usr/bin/";
     if(ecmd->argv[0] == 0)
       exit(0);
 
+    // Your code here ...
+    char path1[100] = "/bin/";
+    char path2[100] = "/usr/bin/";
     execv(ecmd->argv[0], ecmd->argv);
     execv(strcat(path1, ecmd->argv[0]), ecmd->argv);
     execv(strcat(path2, ecmd->argv[0]), ecmd->argv);
-
     fprintf(stderr, "exec %s failed\n", ecmd->argv[0]);
     break;
 
   case '>':
   case '<':
-  rcmd = (struct redircmd*)cmd;
-    if (close(rcmd->fd) < 0) {
+    rcmd = (struct redircmd*)cmd;
+
+    // Your code here ...
+
+if (close(rcmd->fd) < 0) {
         perror("close error");
         exit(-1);
-    }   
-    if (rcmd->mode & O_CREAT) { // 如果是重定向输出，还需要新建输出文件
+    }
+    if (rcmd->mode & O_CREAT) {
         if (open(rcmd->file, rcmd->mode, S_IRUSR | S_IWUSR) < 0) {
             perror("open file error");
             exit(-1);
-        }   
-    }   
+        }
+    }
     else if (open(rcmd->file, rcmd->mode) < 0) {
         perror("open file error");
         exit(-1);
     }   
+
     runcmd(rcmd->cmd);
     break;
 
   case '|':
     pcmd = (struct pipecmd*)cmd;
 
+    // Your code here ...
     if(pipe(p) < 0)
       fprintf(stderr, "pipe error\n");
 
 
     if(fork() == 0) {
-      close(1);  // close STDOUT
-      dup(p[1]); // create a copy of fd p[1], using min. free fd, i.e. STDOUT
-      close(p[0]); // we close this and the one below to use in other child
+      close(1);
+      dup(p[1]); 
+      close(p[0]);
       close(p[1]);
-      runcmd(pcmd->left); // here STDOUT is bound to write-end of pipe
+      runcmd(pcmd->left);
     }
     if(fork() == 0) {
-      close(0); // close STDIN
-      dup(p[0]); // as in other proc, we create a copy of read-end
+      close(0);
+      dup(p[0]); 
       close(p[0]);
       close(p[1]);
       runcmd(pcmd->right);
     }
-    close(p[0]); // all execution in in left right and pipe, close parent fds
+    close(p[0]);
     close(p[1]);
     wait(); // wait for left child
     wait(); // wait for right child
+
     break;
   }    
   exit(0);
@@ -370,3 +375,4 @@ parseexec(char **ps, char *es)
   cmd->argv[argc] = 0;
   return ret;
 }
+
